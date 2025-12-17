@@ -21,3 +21,11 @@ jobs:
         
       - name: Fetch Subprojects
         run: bash fetch.sh
+
+      - name: Package
+        run: tar czf integrated.tar.gz components/
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: integrated.tar.gz
