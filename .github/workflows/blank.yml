@@ -21,9 +21,17 @@ jobs:
       - name: Checkout meta repo
         uses: actions/checkout@v4
 
+      - name: Create parent directory
+        run: |
+          echo "PARENT_DIR=Project-${{ inputs.version }}" >> $GITHUB_ENV
+          mkidr Project-${{ inputs.version }}
+          
       - name: Fetch Subprojects
-        run: bash fetch.sh
-        
+        run: |
+          mkdir -p lattices
+          git clone https://github.com/ykkan/Project_A.git $PARENT_DIR/lattices/Project_A
+          git clone https://github.com/ykkan/Project_B.git $PARENT_DIR/lattices/Project_B
+
       - name: Package integrated bundle
         run: |
           tar czf Project-${{ inputs.version }}.tar.gz lattices
