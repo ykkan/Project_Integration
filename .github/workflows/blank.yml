@@ -24,7 +24,7 @@ jobs:
       - name: Create parent directory
         run: |
           echo "PARENT_DIR=Project-${{ inputs.version }}" >> $GITHUB_ENV
-          mkidr Project-${{ inputs.version }}
+          mkdir $PARENT_DIR
           
       - name: Fetch Subprojects
         run: |
