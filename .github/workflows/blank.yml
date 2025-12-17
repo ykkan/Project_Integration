@@ -23,7 +23,7 @@ jobs:
         
       - name: Package integrated bundle
         run: |
-          tar czf Porject-${{ github.ref_name }}.tar.gz lattices
+          tar czf Project-${{ inputs.version }}.tar.gz lattices
           
       - name: Create GitHub Release + upload asset
         uses: softprops/action-gh-release@v2
