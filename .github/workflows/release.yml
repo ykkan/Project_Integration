@@ -21,27 +21,28 @@ jobs:
       - name: Checkout meta repo
         uses: actions/checkout@v4
 
-      - name: Create parent directory
+      - name: Set release name
         run: |
-          echo "PARENT_DIR=Project-${{ inputs.version }}" >> $GITHUB_ENV
-          mkdir $PARENT_DIR
-          
-      - name: Fetch Subprojects
+          echo "RELEASE_NAME=Project-${{ inputs.version }}" >> $GITHUB_ENV
+
+      - name: Build lattice directory
         run: |
-          mkdir -p lattices
-          git clone https://github.com/ykkan/Project_A.git $PARENT_DIR/lattices/Project_A
-          git clone https://github.com/ykkan/Project_B.git $PARENT_DIR/lattices/Project_B
+          PDIR=$RELEASE_NAME/lattices
+          mkdir $PDIR
+          mkdir -p $RELEASE_NAME/lattices
+          git clone https://github.com/ykkan/Project_A.git $PDIR/Project_A
+          git clone https://github.com/ykkan/Project_B.git $PDIR/Project_B
 
       - name: Package integrated bundle
         run: |
-          tar czf Project-${{ inputs.version }}.tar.gz lattices
+          tar czf $RELEASE_NAME.tar.gz lattices
           
       - name: Create GitHub Release + upload asset
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ inputs.version }}
           name: ${{ inputs.version }}
-          files: Project-${{ inputs.version }}.tar.gz
+          files: $RELEASE_NAME.tar.gz
 
 
 
