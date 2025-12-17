@@ -1,31 +1,41 @@
 # This is a basic workflow to help you get started with Actions
+name: Integration Release
 
-name: Release
-
-# Controls when the workflow will run
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
- 
-  fetch:
-    # The type of runner that the job will run on
+build-release:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout meta repo
         uses: actions/checkout@v4
-        
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout meta repo
+        uses: actions/checkout@v4
+
       - name: Fetch Subprojects
         run: bash fetch.sh
 
-      - name: Package
-        run: tar czf integrated.tar.gz ./*
-
-      - name: Upload to Release
+        
+      - name: Fetch subproejcts into mera repo
+        env:
+          GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
+        run: bash fetch.sh
+        
+      - name: Package integrated bundle
+        run: |
+          tar czf Porject-${{ github.ref_name }}.tar.gz lattices
+          
+      - name: Create GitHub Release + upload asset
         uses: softprops/action-gh-release@v2
         with:
-          files: integrated.tar.gz
+          files: Porject-${{ github.ref_name }}.tar.gz
