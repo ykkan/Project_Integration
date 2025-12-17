@@ -34,7 +34,7 @@ jobs:
 
       - name: Package integrated bundle
         run: |
-          tar czf $RELEASE_NAME.tar.gz lattices
+          tar czf $RELEASE_NAME.tar.gz $RELEASE_NAME
           
       - name: Create GitHub Release + upload asset
         uses: softprops/action-gh-release@v2
