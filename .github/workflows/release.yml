@@ -24,13 +24,13 @@ jobs:
       - name: Create parent directory
         run: |
           echo "PARENT_DIR=Project-${{ inputs.version }}" >> $GITHUB_ENV
-          mkdir "$PARENT_DIR"
+          mkdir $PARENT_DIR
           
       - name: Fetch Subprojects
         run: |
           mkdir -p lattices
-          git clone https://github.com/ykkan/Project_A.git "$PARENT_DIR/lattices/Project_A"
-          git clone https://github.com/ykkan/Project_B.git "$PARENT_DIR/lattices/Project_B"
+          git clone https://github.com/ykkan/Project_A.git $PARENT_DIR/lattices/Project_A
+          git clone https://github.com/ykkan/Project_B.git $PARENT_DIR/lattices/Project_B
 
       - name: Package integrated bundle
         run: |
