@@ -17,12 +17,6 @@ jobs:
 
       - name: Fetch Subprojects
         run: bash fetch.sh
-
-        
-      - name: Fetch subproejcts into mera repo
-        env:
-          GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
-        run: bash fetch.sh
         
       - name: Package integrated bundle
         run: |
