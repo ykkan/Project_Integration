@@ -28,4 +28,10 @@ jobs:
       - name: Create GitHub Release + upload asset
         uses: softprops/action-gh-release@v2
         with:
-          files: Porject-${{ github.ref_name }}.tar.gz
+          tag_name: ${{ inputs.version }}
+          name: ${{ inputs.version }}
+          files: Project-${{ inputs.version }}.tar.gz
+
+
+
+          
