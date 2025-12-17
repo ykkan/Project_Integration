@@ -28,8 +28,7 @@ jobs:
       - name: Build lattice directory
         run: |
           PDIR=$RELEASE_NAME/lattices
-          mkdir $PDIR
-          mkdir -p $RELEASE_NAME/lattices
+          mkdir -p $PDIR
           git clone https://github.com/ykkan/Project_A.git $PDIR/Project_A
           git clone https://github.com/ykkan/Project_B.git $PDIR/Project_B
 
